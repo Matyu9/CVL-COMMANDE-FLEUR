@@ -1,15 +1,16 @@
-import hashlib
 from datetime import datetime
-
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from werkzeug.exceptions import BadRequestKeyError
-
 from Utils import database
-import sqlite3
+import hashlib
+import os
+import json
 
+conf_file = os.open(os.path.abspath(os.getcwd()) + "/config.json", os.O_RDONLY)
+config_data = json.loads(os.read(conf_file, 150))
 app = Flask(__name__)
-database = database.DataBase(user="cantina", password="LeMdPDeTest", host="localhost", port=3306,
-                             database="cantina_db")
+database = database.DataBase(user=config_data['database_username'], password=config_data['database_password'],
+                                   host="localhost", port=3306, database=config_data['database_name'])
 database.connection()
 database.create_table("""CREATE TABLE IF NOT EXISTS commande(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 nom_destinataire TEXT NOT NULL, prenom_destinataire TEXT NOT NULL, classe_destinataire INT  NOT NULL, nom_envoyeur 
