@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CVL - Saint Valentin - 2023</title>
+</head>
+<body>
+    <h1 style="text-decoration: underline">CVL - ROSA PARKS - ST VALENTIN</h1>
+    <form action="{{ url_for('commande') }}" method="post">
+        <h3>Nom du destinataire:</h3>
+        <label>
+            <input type = 'text' name = 'nd' required/>
+        </label>
+        <h3>Prénom du destinataire:</h3>
+        <label>
+            <input type = 'text' name = 'pd' required/>
+        </label>
+        <h3>Classe du destinataire:</h3>
+        <label>
+            <input type = 'text' name = 'cd' required/>
+        </label>
+        <h3>Message pour le destinataire:</h3>
+        <label>
+            <textarea name = 'md'></textarea>
+        </label>
+        <h3>Annonyme:</h3>
+        <div>
+            <input type="radio" id="oui" name="oui" value="yes" >
+            <label for="oui">Oui</label>
+        </div>
+        <div>
+            <input type="radio" id="non" name="non" value="false" checked>
+            <label for="non">Non</label>
+        </div>
+        <br>
+        <button type="submit">Envoyer ma demande!</button>
+    </form>
+</body>
+</html>
