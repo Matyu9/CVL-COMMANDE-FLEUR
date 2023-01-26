@@ -2,42 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CVL - Saint Valentin - 2023</title>
 </head>
-<body>
-    <h1 style="text-decoration: underline">CVL - ROSA PARKS - ST VALENTIN</h1>
-    <form action="{{ url_for('commande') }}" method="post">
-        <h3>Nom du destinataire:</h3>
-        <label>
-            <input type = 'text' name = 'nd' required/>
-        </label>
-        <h3>Prénom du destinataire:</h3>
-        <label>
-            <input type = 'text' name = 'pd' required/>
-        </label>
-        <h3>Classe du destinataire:</h3>
-        <label>
-            <input type = 'text' name = 'cd' required/>
-        </label>
-        <h3>Votre Nom:</h3>
-        <label>
-            <input type = 'text' name = 'pe' required/>
-        </label>
-        <label>
-        <h3>Votre Prénom:</h3>
-        <label>
-            <input type = 'text' name = 'ne' required/>
-        </label>
-        <h3>Votre Classe:</h3>
-        <label>
-            <input type = 'text' name = 'ce' required/>
-        <h3>Message pour le destinataire:</h3>
-        </label>
-            <textarea name = 'message' required maxlength="150"></textarea>
-        </label>
-        <br>
-        <button type="submit">Envoyer ma demande!</button>
-    </form>
+<body class="has-text-centered">
+    <h1 style="text-decoration: underline; padding-top: 1em;" class="title columns is-centered is-vcentered">CVL - ROSA PARKS - ST VALENTIN</h1><br>
+    <div class="columns is-centered is-vcentered">
+        <form action="{{ url_for('commande') }}" method="post">
+            <h3 class="is-size-4">Nom du destinataire:</h3>
+            <label>
+                <input class="input is" style="margin-bottom: 1em"  type = 'text' name = 'nd' required/>
+            </label>
+            <h3 class="is-size-4">Prénom du destinataire:</h3>
+            <label>
+                <input class="input is" style="margin-bottom: 1em"  type = 'text' name = 'pd' required/>
+            </label>
+            <h3 class="is-size-4">Classe du destinataire:</h3>
+            <label>
+                <input class="input is" style="margin-bottom: 1em"  type = 'text' name = 'cd' required/>
+            </label>
+            <h3 class="is-size-4">Votre Nom:</h3>
+            <label>
+                <input class="input is" style="margin-bottom: 1em"  type = 'text' name = 'pe' required/>
+            </label>
+            <h3 class="is-size-4">Votre Prénom:</h3>
+            <label>
+                <input class="input is" style="margin-bottom: 1em"  type = 'text' name = 'ne' required/>
+            </label>
+            <h3 class="is-size-4">Votre Classe:</h3>
+            <label>
+                <input class="input is" style="margin-bottom: 1em"  type = 'text' name = 'ce' required/>
+            </label>
+            <h3 class="is-size-4" >Message pour le destinataire:</h3>
+            <label>
+                <textarea class="textarea" style="margin-bottom: 1em" name = 'message' required maxlength="150"></textarea>
+            </label>
+            <br>
+            <button class="button is-primary" type="submit">Envoyer ma demande!</button>
+        </form>
+    </div>
 </body>
 </html>
