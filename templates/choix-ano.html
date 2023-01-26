@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CVL - Saint Valentin - 2023</title>
 </head>
-<body>
-    <h1 style="text-decoration: underline">CVL - ROSA PARKS - ST VALENTIN</h1>
-    <h2><a href="{{ url_for('ano') }}">Anonyme</a></h2>
-    <h2><a href="{{ url_for('no_ano') }}">Pas Anonyme</a></h2>
+<body class="has-text-centered">
+    <h1 class="is-size-1" style="text-decoration: underline">CVL - ROSA PARKS - ST VALENTIN</h1>
+    <button style="margin-top: 1em" class="button is-primary" onclick="window.location.href='{{ url_for('ano') }}'">Anonyme</button><br>
+    <button style="margin-top: 1em" class="button is-danger" onclick="window.location.href='{{ url_for('no_ano') }}'">Pas Anonyme</button>
 </body>
 </html>
