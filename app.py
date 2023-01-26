@@ -6,6 +6,22 @@ import hashlib
 import os
 import json
 
+
+def hash_perso(passwordtohash):
+    try:
+        passw = passwordtohash.encode()
+    except AttributeError:
+        return None
+    passw = hashlib.md5(passw).hexdigest()
+    passw = passw.encode()
+    passw = hashlib.sha256(passw).hexdigest()
+    passw = passw.encode()
+    passw = hashlib.sha512(passw).hexdigest()
+    passw = passw.encode()
+    passw = hashlib.md5(passw).hexdigest()
+    return passw
+
+
 conf_file = os.open(os.path.abspath(os.getcwd()) + "/config.json", os.O_RDONLY)
 config_data = json.loads(os.read(conf_file, 150))
 app = Flask(__name__)
@@ -61,33 +77,17 @@ def commande():
                                                                                                 request.form["pd"])
 
 
-def hash_perso(passwordtohash):
-    try:
-        passw = passwordtohash.encode()
-    except AttributeError:
-        return None
-    passw = hashlib.md5(passw).hexdigest()
-    passw = passw.encode()
-    passw = hashlib.sha256(passw).hexdigest()
-    passw = passw.encode()
-    passw = hashlib.sha512(passw).hexdigest()
-    passw = passw.encode()
-    passw = hashlib.md5(passw).hexdigest()
-    return
-
-
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
         user = request.form['nm']
         passwd = request.form['passwd']
-        row = database.select(f'''SELECT user_name, password, token FROM user WHERE password = ? AND user_name = ?''',
+        row = database.select(f'''SELECT user_name, password, token FROM user WHERE password = ? AND user_name=?''',
                               (hash_perso(passwd), user), 1)
-
         try:
             resp = make_response(redirect(url_for('home')))
             resp.set_cookie('userID', row[2])
-            database.insert(f'''UPDATE user SET last_online=? WHERE token=?''', (datetime.datetime.now(), row[2]))
+            database.insert(f'''UPDATE user SET last_online=? WHERE token=?''', (datetime.now(), row[2]))
             return resp
         except Exception as e:
             print(e)
