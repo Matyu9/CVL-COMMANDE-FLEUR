@@ -22,8 +22,12 @@ def hash_perso(passwordtohash):
     return passw
 
 
-conf_file = os.open(os.path.abspath(os.getcwd()) + "/config.json", os.O_RDONLY)
-config_data = json.loads(os.read(conf_file, 150))
+file_path = os.path.abspath(os.path.join(os.getcwd(), "config.json"))
+
+# Lecture du fichier JSON
+with open(file_path, 'r') as file:
+    config_data = json.load(file)
+
 app = Flask(__name__)
 database = database.DataBase(user=config_data['database_username'], password=config_data['database_password'],
                                    host="localhost", port=3306, database=config_data['database_name'])
