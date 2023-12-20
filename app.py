@@ -102,4 +102,4 @@ def login():
 
 
 if __name__ == '__main__':
-    app.run(port=4998)
+    app.run(port=4998, host='0.0.0.0')
