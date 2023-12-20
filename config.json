@@ -1,0 +1,8 @@
+{
+  "database_username": "cantina",
+  "database_password": "LeMdPDeTest",
+  "database_address": "127.0.0.1",
+  "database_name": "cvl_saint_valentin",
+  "database_port": 3306,
+  "port": 3010
+}

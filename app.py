@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from werkzeug.exceptions import BadRequestKeyError
-from Utils import database
+from cantinaUtils.Database import DataBase
 import hashlib
 import os
 import json
@@ -29,12 +29,12 @@ with open(file_path, 'r') as file:
     config_data = json.load(file)
 
 app = Flask(__name__)
-database = database.DataBase(user=config_data['database_username'], password=config_data['database_password'],
+database = DataBase(user=config_data['database_username'], password=config_data['database_password'],
                                    host="localhost", port=3306, database=config_data['database_name'])
 database.connection()
-database.create_table("""CREATE TABLE IF NOT EXISTS commande(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+database.exec("""CREATE TABLE IF NOT EXISTS commande(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 nom_destinataire TEXT NOT NULL, prenom_destinataire TEXT NOT NULL, classe_destinataire INT  NOT NULL, nom_envoyeur 
-TEXT, prenom_envoyeur TEXT, classe_envoyeur INT, message TEXT(150))""")
+TEXT, prenom_envoyeur TEXT, classe_envoyeur INT, message TEXT(150))""", None)
 
 
 @app.route('/')
@@ -69,13 +69,13 @@ def commande():
     if not request.form['nd'] or not request.form["pd"] or not request.form["cd"] or not request.form['message']:
         return redirect(url_for("home"))
     try:
-        database.insert("""INSERT INTO commande(nom_destinataire, prenom_destinataire, classe_destinataire, 
-        nom_envoyeur, prenom_envoyeur, classe_envoyeur, message) VALUES (?, ?, ?, ?, ?, ?, ?)""",
+        database.exec("""INSERT INTO commande(nom_destinataire, prenom_destinataire, classe_destinataire, 
+        nom_envoyeur, prenom_envoyeur, classe_envoyeur, message) VALUES (%s, %s, %s, %s, %s, %s, %s)""",
                         (request.form['nd'], request.form['pd'], request.form['cd'], request.form['ne'],
                          request.form['pe'], request.form['ce'], request.form['message']))
     except BadRequestKeyError:
-        database.insert("""INSERT INTO commande(nom_destinataire, prenom_destinataire, classe_destinataire, message) 
-        VALUES (?, ?, ?, ?)""", (request.form['nd'], request.form['pd'], request.form['cd'], request.form['message']))
+        database.exec("""INSERT INTO commande(nom_destinataire, prenom_destinataire, classe_destinataire, message) 
+        VALUES (%s, %s, %s, %s)""", (request.form['nd'], request.form['pd'], request.form['cd'], request.form['message']))
 
     return "Merci de votre commande, la fleur de {} {} sera remis le je sais plus quand".format(request.form["nd"],
                                                                                                 request.form["pd"])

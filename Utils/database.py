@@ -1,4 +1,4 @@
-import mariadb
+import pymysql
 
 
 class DataBase:
@@ -12,7 +12,7 @@ class DataBase:
         self.connector = None
 
     def connection(self):
-        self.connector = mariadb.connect(user=self.user, password=self.password, host=self.host, port=self.port,
+        self.connector = pymysql.connect(user=self.user, password=self.password, host=self.host, port=self.port,
                                          database=self.database)
         self.cursor = self.connector.cursor()
 
