@@ -1,24 +1,8 @@
 import werkzeug.exceptions
 from flask import Flask, render_template, request, redirect, url_for
 from cantinaUtils.Database import DataBase
-import hashlib
 import os
 import json
-
-
-def hash_perso(passwordtohash):
-    try:
-        passw = passwordtohash.encode()
-    except AttributeError:
-        return None
-    passw = hashlib.md5(passw).hexdigest()
-    passw = passw.encode()
-    passw = hashlib.sha256(passw).hexdigest()
-    passw = passw.encode()
-    passw = hashlib.sha512(passw).hexdigest()
-    passw = passw.encode()
-    passw = hashlib.md5(passw).hexdigest()
-    return passw
 
 
 file_path = os.path.abspath(os.path.join(os.getcwd(), "config.json"))
@@ -62,9 +46,6 @@ def commande():
 
     return render_template('commande.html', need_to_be_receive_by_cvl=need_to_be_receive_by_cvl,
                            nd=request.form['nd'], pd=request.form['pd'])
-
-    return ("Merci de votre commande, votre fleur vous sera remis le je sais plus quand, vers le stand tenu par le "
-                "CVL")
 
 
 if __name__ == '__main__':
