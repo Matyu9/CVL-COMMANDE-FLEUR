@@ -1,8 +1,8 @@
-import werkzeug.exceptions
 from flask import Flask, render_template, request, redirect, url_for
 from cantinaUtils.Database import DataBase
 import os
 import json
+import werkzeug.exceptions
 
 
 file_path = os.path.abspath(os.path.join(os.getcwd(), "config.json"))
@@ -16,8 +16,9 @@ database = DataBase(user=config_data['database_username'], password=config_data[
                                    host="localhost", port=3306, database=config_data['database_name'])
 database.connection()
 database.exec("""CREATE TABLE IF NOT EXISTS commande(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-nom_destinataire TEXT NOT NULL, prenom_destinataire TEXT NOT NULL, classe_destinataire INT  NOT NULL, nom_envoyeur 
-TEXT, prenom_envoyeur TEXT, classe_envoyeur INT, message TEXT(150), need_to_be_receive_by_cvl BOOL)""", None)
+nom_destinataire TEXT NOT NULL, prenom_destinataire TEXT NOT NULL, classe_destinataire TEXT NOT NULL, 
+nom_envoyeur TEXT NOT NULL, prenom_envoyeur TEXT NOT NULL, classe_envoyeur TEXT NOT NULL, message TEXT(150), 
+need_to_be_receive_by_cvl BOOL)""", None)
 
 
 @app.route('/')
