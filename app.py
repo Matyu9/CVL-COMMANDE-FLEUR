@@ -1,6 +1,5 @@
-from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, make_response
-from werkzeug.exceptions import BadRequestKeyError
+import werkzeug.exceptions
+from flask import Flask, render_template, request, redirect, url_for
 from cantinaUtils.Database import DataBase
 import hashlib
 import os
@@ -44,13 +43,15 @@ def home():
 
 @app.route('/commande', methods=['POST'])
 def commande():
-    if (not request.form['nd'] or not request.form["pd"] or not request.form["cd"] or not request.form['message']
-            or not request.form['themself']):
+    if not request.form['nd'] or not request.form["pd"] or not request.form["cd"] or not request.form['message']:
         return redirect(url_for("home"))
 
-    if request.form['themself'] == 'Oui':
-        need_to_be_receive_by_cvl = True
-    else:
+    try:
+        if request.form['themself'] == 'on':
+            need_to_be_receive_by_cvl = True
+        else:
+            need_to_be_receive_by_cvl = False
+    except werkzeug.exceptions.BadRequestKeyError:
         need_to_be_receive_by_cvl = False
 
     database.exec("""INSERT INTO commande(nom_destinataire, prenom_destinataire, classe_destinataire, 
@@ -59,11 +60,10 @@ def commande():
                                           request.form['ne'], request.form['pe'], request.form['ce'],
                                           request.form['message'], need_to_be_receive_by_cvl))
 
-    if need_to_be_receive_by_cvl:
-        return "Merci de votre commande, la fleur de {} {} sera remis le je sais plus quand".format(request.form["nd"],
-                                                                                                    request.form["pd"])
-    else:
-        return ("Merci de votre commande, votre fleur vous sera remis le je sais plus quand, vers le stand tenu par le "
+    return render_template('commande.html', need_to_be_receive_by_cvl=need_to_be_receive_by_cvl,
+                           nd=request.form['nd'], pd=request.form['pd'])
+
+    return ("Merci de votre commande, votre fleur vous sera remis le je sais plus quand, vers le stand tenu par le "
                 "CVL")
 
 
