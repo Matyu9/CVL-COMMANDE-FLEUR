@@ -18,7 +18,7 @@ database.connection()
 database.exec("""CREATE TABLE IF NOT EXISTS commande(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 nom_destinataire TEXT NOT NULL, prenom_destinataire TEXT NOT NULL, classe_destinataire TEXT NOT NULL, 
 nom_envoyeur TEXT NOT NULL, prenom_envoyeur TEXT NOT NULL, classe_envoyeur TEXT NOT NULL, message TEXT(150), 
-need_to_be_receive_by_cvl BOOL)""", None)
+need_to_be_receive_by_cvl BOOL, commander_le TIMESTAMP DEFAULT CURRENT_TIMESTAMP)""", None)
 
 
 @app.route('/')
