@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from cantinaUtils.Database import DataBase
 from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
-from Cogs.panel import panel_cogs
+from Cogs.panel import panel_index_cogs
 import os
 import json
 
@@ -21,7 +21,7 @@ database.exec("""CREATE TABLE IF NOT EXISTS commande(id INT PRIMARY KEY NOT NULL
 nom_destinataire TEXT NOT NULL, prenom_destinataire TEXT NOT NULL, classe_destinataire TEXT NOT NULL, 
 nom_envoyeur TEXT NOT NULL, prenom_envoyeur TEXT NOT NULL, classe_envoyeur TEXT NOT NULL, message TEXT(150), 
 need_to_be_receive_by_cvl BOOL, paye BOOL DEFAULT FALSE, paye_at TIMESTAMP, 
-commander_le TIMESTAMP DEFAULT CURRENT_TIMESTAMP)""", None)
+commander_le TIMESTAMP DEFAULT CURRENT_TIMESTAMP, distribué BOOL DEFAULT FALSE NOT NULL)""", None)
 
 
 @app.route('/')
@@ -41,7 +41,7 @@ def login():
 
 @app.route('/panel', methods=['POST', 'GET'])
 def panel():
-    return panel_cogs(database)
+    return panel_index_cogs(database)
 
 
 if __name__ == '__main__':
