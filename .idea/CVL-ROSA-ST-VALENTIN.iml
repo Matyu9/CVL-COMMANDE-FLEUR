@@ -8,7 +8,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.11 (CVL-ROSA-ST-VALENTIN)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.9 (CVL-ROSA-ST-VALENTIN)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bulma" level="application" />
   </component>
