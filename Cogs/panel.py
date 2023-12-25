@@ -24,4 +24,6 @@ def panel_show_commande_cogs(database):
     if request.cookies.get('token') != "LOGGIN-SUCCESS":
         return redirect(url_for('login'))
 
-    return render_template('panel/show_commande.html')
+    list_commandes = database.select('SELECT * FROM commande', None)
+
+    return render_template('panel/show_commande.html', list_commandes=list_commandes)
