@@ -10,7 +10,7 @@ def login_cogs(database):
 
         # Je fais juste une verification d'un password pour pas me casser le crane
         if password == "CVL-rosa-STVALENTIN2023!":
-            resp = make_response(redirect(url_for("panel")))
+            resp = make_response(redirect(url_for("panel_home")))
             resp.set_cookie("token", "LOGGIN-SUCCESS")
             return resp
         else:
