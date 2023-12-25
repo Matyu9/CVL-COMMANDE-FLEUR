@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from cantinaUtils.Database import DataBase
 from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
-from Cogs.panel import panel_index_cogs
+from Cogs.panel import panel_index_cogs, panel_show_commande_cogs
 import os
 import json
 
@@ -40,8 +40,13 @@ def login():
 
 
 @app.route('/panel', methods=['POST', 'GET'])
-def panel():
+def panel_home():
     return panel_index_cogs(database)
+
+
+@app.route('/panel/show_commande', methods=['POST', 'GET'])
+def panel_show_commande():
+    return panel_show_commande_cogs(database)
 
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ def commande_cogs(database):
         else:
             need_to_be_receive_by_cvl = True
     except werkzeug.exceptions.BadRequestKeyError:
-        need_to_be_receive_by_cvl = False
+        need_to_be_receive_by_cvl = True
 
     database.exec("""INSERT INTO commande(nom_destinataire, prenom_destinataire, classe_destinataire, 
     nom_envoyeur, prenom_envoyeur, classe_envoyeur, message, need_to_be_receive_by_cvl) VALUES 
