@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from cantinaUtils.Database import DataBase
 from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
-from Cogs.panel import panel_index_cogs, panel_show_commande_cogs
+from Cogs.panel import panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs
 import os
 import json
 
@@ -47,6 +47,11 @@ def panel_home():
 @app.route('/panel/show_commande', methods=['POST', 'GET'])
 def panel_show_commande():
     return panel_show_commande_cogs(database)
+
+
+@app.route('/panel/show_commande/<id>', methods=['POST', 'GET'])
+def panel_show_specifique_commande(id):
+    return panel_show_specifique_commande_cogs(database, id)
 
 
 if __name__ == '__main__':

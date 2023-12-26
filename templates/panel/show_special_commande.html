@@ -106,47 +106,10 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Les commandes</h6>
+                        <h6 class="mb-0">Commande numéro {{ specifique_commande[0] }}</h6>
                     </div>
                     <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-white">
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Date de la commande</th>
-                                    <th scope="col">Acheteur</th>
-                                    <th scope="col">Receveur</th>
-                                    <th scope="col">Classe Receveur</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for element in list_commandes %}
-                                    <tr>
-                                        <td> {{ element[0] }}</td>
-                                        <td> {{ element[11] }}</td>
-                                        <td>
-                                            {% if element[8] %}
-                                                Anonyme
-                                            {% else %}
-                                                {{ element[4] }} {{ element[5] }}
-                                            {% endif %}
-                                        </td>
-                                        <td> {{ element[1] }} {{ element[2] }}</td>
-                                        <td> {{ element[6] }}</td>
-                                        <td>
-                                            {% if  element[9] %}
-                                                Payé
-                                            {% elif not element[9]%}
-                                                Impayé
-                                            {% endif %}
-                                        </td>
-                                        <td><a class="btn btn-sm btn-primary" href="{{ url_for('panel_show_specifique_commande', id=element[0]) }}">Detail</a></td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+
                     </div>
                 </div>
             </div>

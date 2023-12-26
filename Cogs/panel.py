@@ -27,3 +27,13 @@ def panel_show_commande_cogs(database):
     list_commandes = database.select('SELECT * FROM commande', None)
 
     return render_template('panel/show_commande.html', list_commandes=list_commandes)
+
+
+def panel_show_specifique_commande_cogs(database, id):
+    if request.cookies.get('token') != "LOGGIN-SUCCESS":
+        return redirect(url_for('login'))
+
+    specifique_commande = database.select('''SELECT * FROM commande WHERE id=%s''', id, number_of_data=1)
+
+    return render_template('panel/show_special_commande.html', specifique_commande=specifique_commande)
+
