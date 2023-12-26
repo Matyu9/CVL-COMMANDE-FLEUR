@@ -106,10 +106,15 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Commande numéro {{ specifique_commande[0] }}</h6>
+                        <h4 class="mb-0">Commande numéro {{ specifique_commande[0] }}</h4>
                     </div>
-                    <div class="table-responsive">
-
+                    <div class="mb-0">
+                        <p>
+                            <strong style="text-decoration: underline">Auteur de la commande:</strong> {{ specifique_commande[4] }} {{ specifique_commande[5] }}
+                            <br>
+                            <strong style="text-decoration: underline">Classe de l'auteur de la commande:</strong> {{ specifique_commande[6] }}
+                        </p>
+                        <p></p>
                     </div>
                 </div>
             </div>
