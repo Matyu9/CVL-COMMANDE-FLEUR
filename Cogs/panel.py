@@ -37,3 +37,18 @@ def panel_show_specifique_commande_cogs(database, id):
 
     return render_template('panel/show_special_commande.html', specifique_commande=specifique_commande)
 
+
+def panel_edit_commande_cogs(database, uniqueID=None):
+    if request.cookies.get('token') != "LOGGIN-SUCCESS":
+        return redirect(url_for('login'))
+
+    '''
+    Description du process:
+        1 - Entrer l'unique ID de la commande
+        2 - Affichage des détails de la commande
+        3 - Bouton confirmer le payement de la commande (si pas confirmer)
+        4 - Bouton confirmer la distribution (si payer et pas confirmer)
+        5 - Loop
+    '''
+
+    return 'Edit Command'
