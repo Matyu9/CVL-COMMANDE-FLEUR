@@ -181,7 +181,7 @@
                                                 Impayé
                                             {% endif %}
                                         </td>
-                                        <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                        <td><a class="btn btn-sm btn-primary" href="{{ url_for('panel_show_specifique_commande', id=element[0]) }}">Detail</a></td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
