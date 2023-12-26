@@ -108,13 +108,22 @@
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 class="mb-0">Commande numéro {{ specifique_commande[0] }}</h4>
                     </div>
-                    <div class="mb-0">
-                        <p>
-                            <strong style="text-decoration: underline">Auteur de la commande:</strong> {{ specifique_commande[4] }} {{ specifique_commande[5] }}
-                            <br>
-                            <strong style="text-decoration: underline">Classe de l'auteur de la commande:</strong> {{ specifique_commande[6] }}
-                        </p>
-                        <p></p>
+                    <div class="align-items-center justify-content-between mb-4">
+                        <p><strong style="color: white">Identifiant : </strong>{{ specifique_commande[0] }}</p>
+                        <p><strong style="color: white">Nom + Prénom de l'auteur : </strong>{{ specifique_commande[4] }} {{ specifique_commande[5] }}</p>
+                        <p><strong style="color: white">Classe de l'auteur : </strong>{{ specifique_commande[6] }}</p>
+                        <br>
+                        <p><strong style="color: white">Nom + Prénom du receveur : </strong>{{ specifique_commande[1] }} {{ specifique_commande[2] }}</p>
+                        <p><strong style="color: white">Classe du receveur : </strong>{{ specifique_commande[3] }}</p>
+                        <br>
+                        <p><strong style="color: white">Message : </strong>{{ specifique_commande[7] }}</p>
+                        <br>
+                        <p><strong style="color: white">Avancement : </strong></p>
+                        <p><strong style="color: white">Préparé : </strong>{{ specifique_commande[14] }}</p>
+                        <p><strong style="color: white">Payé : </strong>{{ specifique_commande[9] }}</p>
+                        <p><strong style="color: white">Distribué : </strong>{{ specifique_commande[12] }}</p>
+                        <br>
+                        <p><strong style="color: white">Code unique : </strong>{{ specifique_commande[13] }}</p>
                     </div>
                 </div>
             </div>
