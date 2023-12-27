@@ -1,4 +1,3 @@
-import werkzeug
 from flask import request, redirect, url_for, render_template
 
 
@@ -38,7 +37,7 @@ def panel_show_specifique_commande_cogs(database, id):
     return render_template('panel/show_special_commande.html', specifique_commande=specifique_commande)
 
 
-def panel_edit_commande_cogs(database, uniqueID=None):
+def panel_edit_commande_cogs(database):
     if request.cookies.get('token') != "LOGGIN-SUCCESS":
         return redirect(url_for('login'))
 
@@ -50,5 +49,16 @@ def panel_edit_commande_cogs(database, uniqueID=None):
         4 - Bouton confirmer la distribution (si payer et pas confirmer)
         5 - Loop
     '''
+    if request.method == 'POST':
+        uniqueID = request.form.get('uniqueID')
+    else:
+        uniqueID = None
+
+    if uniqueID is None:
+        return render_template('panel/edit_commande.html', commande=None, uniqueID=None)  # Render la page avec le form
+
+    elif uniqueID is not None:
+        commande = database.select('''SELECT * FROM commande WHERE code_unique=%s''', uniqueID, 1)
+        return render_template('panel/edit_commande.html', specifique_commande=commande, uniqueID=uniqueID)
 
     return 'Edit Command'

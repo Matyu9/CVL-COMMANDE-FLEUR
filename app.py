@@ -2,7 +2,8 @@ from flask import Flask, render_template
 from cantinaUtils.Database import DataBase
 from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
-from Cogs.panel import panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs
+from Cogs.panel import panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs, \
+    panel_edit_commande_cogs
 import os
 import json
 
@@ -22,7 +23,7 @@ nom_destinataire TEXT NOT NULL, prenom_destinataire TEXT NOT NULL, classe_destin
 nom_envoyeur TEXT NOT NULL, prenom_envoyeur TEXT NOT NULL, classe_envoyeur TEXT NOT NULL, message TEXT(150), 
 need_to_be_receive_by_cvl BOOL, paye BOOL DEFAULT FALSE, paye_at TIMESTAMP, 
 commander_le TIMESTAMP DEFAULT CURRENT_TIMESTAMP, distribué BOOL DEFAULT FALSE NOT NULL, code_unique TEXT, 
-prepare BOOL)""", None)
+prepare BOOL DEFAULT FALSE)""", None)
 
 
 @app.route('/')
@@ -53,6 +54,11 @@ def panel_show_commande():
 @app.route('/panel/show_commande/<id>', methods=['POST', 'GET'])
 def panel_show_specifique_commande(id):
     return panel_show_specifique_commande_cogs(database, id)
+
+
+@app.route('/panel/edit_commande', methods=['POST', 'GET'])
+def panel_edit_commande():
+    return panel_edit_commande_cogs(database)
 
 
 if __name__ == '__main__':
