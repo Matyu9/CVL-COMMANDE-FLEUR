@@ -60,7 +60,8 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="{{ url_for('panel_home') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Page d'accueil</a><br>
-                    <a href="{{ url_for('panel_show_commande') }}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Les commandes</a>
+                    <a href="{{ url_for('panel_show_commande') }}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Les commandes</a><br>
+                    <a href="{{ url_for('panel_edit_commande') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Modifier une commande</a><br>
                 </div>
             </nav>
         </div>
@@ -107,6 +108,12 @@
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 class="mb-0">Commande numéro {{ specifique_commande[0] }}</h4>
+                        <form action="{{ url_for('panel_edit_commande') }}" method="post">
+                            <label>
+                                <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="{{ specifique_commande[13] }}"/>
+                            </label>
+                            <button type="submit" class="btn btn-primary">Modifier la commande</button>
+                        </form>
                     </div>
                     <div class="align-items-center justify-content-between mb-4">
                         <p><strong style="color: white">Identifiant : </strong>{{ specifique_commande[0] }}</p>
