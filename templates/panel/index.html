@@ -19,6 +19,7 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/591e839571.js" crossorigin="anonymous"></script>
 
     <!-- Libraries Stylesheet -->
     <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
@@ -60,8 +61,8 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="{{ url_for('panel_home') }}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Page d'accueil</a><br>
-                    <a href="{{ url_for('panel_show_commande') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Les commandes</a><br>
-                    <a href="{{ url_for('panel_edit_commande') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Modifier une commande</a><br>
+                    <a href="{{ url_for('panel_show_commande') }}" class="nav-item nav-link"><i class="fa-solid fa-database"></i>Les commandes</a><br>
+                    <a href="{{ url_for('panel_edit_commande') }}" class="nav-item nav-link"><i class="fa-solid fa-pen-to-square"></i>Modifier une commande</a><br>
                 </div>
             </nav>
         </div>
