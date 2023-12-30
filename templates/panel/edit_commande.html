@@ -79,9 +79,6 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control bg-dark border-0" type="search" placeholder="Search">
-                </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -105,7 +102,7 @@
             <!-- Sale & Revenue End -->
 
             <div class="container-fluid pt-4 px-4">
-                {% if uniqueID == None and commande == None %}
+                {% if uniqueID == None and specifique_commande == None %}
                     <div class="bg-secondary text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <h4 class="mb-0">Modification d'une commande</h4>
@@ -121,7 +118,7 @@
                             </form>
                         </div>
                     </div>
-                {% elif  uniqueID != None and commande != None %}
+                {% elif  uniqueID != None and specifique_commande != None %}
                     <div class="bg-secondary text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <h4 class="mb-0">Modification d'une commande</h4>
@@ -150,8 +147,22 @@
                             <p><strong style="color: white">Code unique : </strong>{{ specifique_commande[13] }}</p>
                         </div>
                     </div>
-                {% else %}
-                    <!-- Commande inconnu -->
+                {% elif uniqueID != None and specifique_commande == None  %}
+                    <div class="bg-secondary text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h4 class="mb-0">Modification d'une commande</h4>
+                            <form method="post">
+                                <label style="margin-right: 1em">
+                                    <input class="form-control" type = 'text' name = 'uniqueID' placeholder="Identifiants unique" required/>
+                                </label>
+                                <button type="submit" class="btn btn-primary">Chercher</button>
+                            </form>
+                        </div>
+                        <div class="align-items-center justify-content-between mb-4">
+                            <h3>Nous n'avons pas trouver cette commande!</h3>
+                            <img src="https://http.cat/404" alt="Image d'un chat caché sous des papiers pour symboliser l'erreur 404">
+                        </div>
+                    </div>
                 {% endif %}
             </div>
 
