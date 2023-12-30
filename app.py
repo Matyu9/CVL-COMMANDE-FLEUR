@@ -2,15 +2,15 @@ from flask import Flask, render_template
 from cantinaUtils.Database import DataBase
 from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
-from Cogs.panel import panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs, \
-    panel_edit_commande_cogs
+from Cogs.panel import (panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs,
+                        panel_edit_commande_cogs)
 import os
 import json
 
 
 file_path = os.path.abspath(os.path.join(os.getcwd(), "config.json"))
 
-# Lecture du fichier JSON
+# Lecture du fichier roph JSON
 with open(file_path, 'r') as file:
     config_data = json.load(file)
 

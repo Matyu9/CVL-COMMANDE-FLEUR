@@ -287,3 +287,10 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+.form-check-edit-commande {
+    display: inline-flex;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin-bottom: .125rem;
+}

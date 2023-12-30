@@ -118,35 +118,6 @@
                             </form>
                         </div>
                     </div>
-                {% elif  uniqueID != None and specifique_commande != None %}
-                    <div class="bg-secondary text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h4 class="mb-0">Modification d'une commande</h4>
-                            <form method="post">
-                                <label style="margin-right: 1em">
-                                    <input class="form-control" type = 'text' name = 'uniqueID' placeholder="Identifiants unique" required/>
-                                </label>
-                                <button type="submit" class="btn btn-primary">Chercher</button>
-                            </form>
-                        </div>
-                        <div class="align-items-center justify-content-between mb-4">
-                            <p><strong style="color: white">Identifiant : </strong>{{ specifique_commande[0] }}</p>
-                            <p><strong style="color: white">Nom + Prénom de l'auteur : </strong>{{ specifique_commande[4] }} {{ specifique_commande[5] }}</p>
-                            <p><strong style="color: white">Classe de l'auteur : </strong>{{ specifique_commande[6] }}</p>
-                            <br>
-                            <p><strong style="color: white">Nom + Prénom du receveur : </strong>{{ specifique_commande[1] }} {{ specifique_commande[2] }}</p>
-                            <p><strong style="color: white">Classe du receveur : </strong>{{ specifique_commande[3] }}</p>
-                            <br>
-                            <p><strong style="color: white">Message : </strong>{{ specifique_commande[7] }}</p>
-                            <br>
-                            <p><strong style="color: white">Avancement : </strong></p>
-                            <p><strong style="color: white">Préparé : </strong>{{ specifique_commande[14] }}</p>
-                            <p><strong style="color: white">Payé : </strong>{{ specifique_commande[9] }}</p>
-                            <p><strong style="color: white">Distribué : </strong>{{ specifique_commande[12] }}</p>
-                            <br>
-                            <p><strong style="color: white">Code unique : </strong>{{ specifique_commande[13] }}</p>
-                        </div>
-                    </div>
                 {% elif uniqueID != None and specifique_commande == None  %}
                     <div class="bg-secondary text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
@@ -161,6 +132,54 @@
                         <div class="align-items-center justify-content-between mb-4">
                             <h3>Nous n'avons pas trouver cette commande!</h3>
                             <img src="https://http.cat/404" alt="Image d'un chat caché sous des papiers pour symboliser l'erreur 404">
+                        </div>
+                    </div>
+                {% elif  uniqueID != None and specifique_commande != None %}
+                    <div class="bg-secondary text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h4 class="mb-0">Modification d'une commande</h4>
+                            <form method="post">
+                                <label style="margin-right: 1em">
+                                    <input class="form-control" type = 'text' name = 'uniqueID' placeholder="Identifiants unique" required/>
+                                </label>
+                                <button type="submit" class="btn btn-primary">Chercher</button>
+                            </form>
+                        </div>
+                        <div class="align-items-center justify-content-between mb-4">
+                            <h4><strong style="color: white">Code unique : </strong>{{ specifique_commande[13] }}</h4>
+                            <br>
+                            <h5><strong style="color: white; text-decoration: underline">Avancement : </strong></h5>
+                            <div id="value">
+                                <p><strong style="color: white">Préparé : </strong>{{ specifique_commande[14] }}</p>
+                                <p><strong style="color: white">Payé : </strong>{{ specifique_commande[9] }}</p>
+                                <p><strong style="color: white">Distribué : </strong>{{ specifique_commande[12] }}</p>
+                                <br>
+                                <button onclick="showEdit()" class="btn btn-primary">Modifiier la commande</button>
+                            </div>
+                            <div id="edit"  hidden="hidden">
+                                <form>
+                                    <div class="form-check-edit-commande" style="padding-bottom: 1rem">
+                                        <label class="form-check-label" for="flexCheckDistrib">
+                                            <strong style="color: white">Distribué : </strong>
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDistrib" style="margin-left: 15px" {% if specifique_commande[14] %} checked {% endif %}>
+                                    </div><br>
+                                    <div class="form-check-edit-commande" style="padding-bottom: 1rem">
+                                        <label class="form-check-label" for="flexCheckPaye">
+                                            <strong style="color: white">Payé : </strong>
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckPaye" style="margin-left: 15px" {% if specifique_commande[9] %} checked {% endif %}>
+                                    </div><br>
+                                    <div class="form-check-edit-commande" style="padding-bottom: 1rem">
+                                        <label class="form-check-label" for="flexCheckPrepa">
+                                            <strong style="color: white">Préparé : </strong>
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckPrepa" style="margin-left: 15px" {% if specifique_commande[12] %} checked {% endif %}>
+                                    </div>
+                                    <br><br>
+                                    <button type="submit" class="btn btn-primary">Modifier la commande</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 {% endif %}
@@ -215,6 +234,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/edit_commande.js') }}"></script>
 </body>
 
 </html>
