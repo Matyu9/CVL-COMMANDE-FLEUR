@@ -1,0 +1,28 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: SSH into production server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.PROD_HOST }}
+        username: ${{ secrets.PROD_USERNAME }}
+        password: ${{ secrets.PROD_PASSWORD }} # Utiliser des clés SSH est recommandé pour des raisons de sécurité
+        port: 22 # Le port SSH de votre serveur
+
+        # Commandes à exécuter sur le serveur
+        script: |
+          cd /home/matyu/CVL-ROSA-ST-VALENTIN
+          git pull origin prod
+          systemctl restart cvl-st-valentin.service

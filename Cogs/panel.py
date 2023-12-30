@@ -55,7 +55,7 @@ def panel_edit_commande_cogs(database):
         uniqueID = None
 
     if uniqueID is None:
-        return render_template('panel/edit_commande.html', commande=None, uniqueID=None)  # Render la page avec le form
+        return render_template('panel/edit_commande.html', specifique_commande=None, uniqueID=None)  # Render la page avec le form
 
     elif uniqueID is not None:
         commande = database.select('''SELECT * FROM commande WHERE code_unique=%s''', uniqueID, 1)
