@@ -38,7 +38,7 @@ def commande():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    return login_cogs(database)
+    return login_cogs(config_data['login_password'])
 
 
 @app.route('/panel', methods=['POST', 'GET'])
