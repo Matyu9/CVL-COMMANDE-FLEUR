@@ -3,7 +3,7 @@ from cantinaUtils.Database import DataBase
 from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
 from Cogs.panel import (panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs,
-                        panel_edit_commande_cogs)
+                        panel_edit_commande_cogs, panel_edit_commande_back_cogs)
 import os
 import json
 
@@ -59,6 +59,11 @@ def panel_show_specifique_commande(id):
 @app.route('/panel/edit_commande', methods=['POST', 'GET'])
 def panel_edit_commande():
     return panel_edit_commande_cogs(database)
+
+
+@app.route('/panel/edit_commande/edit', methods=['POST'])
+def panel_edit_commande_back():
+    return panel_edit_commande_back_cogs(database)
 
 
 if __name__ == '__main__':

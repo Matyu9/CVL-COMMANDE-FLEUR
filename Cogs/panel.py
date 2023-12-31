@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import request, redirect, url_for, render_template
 
 
@@ -16,7 +17,8 @@ def panel_index_cogs(database):
 
     list_commandes = database.select(body='SELECT * FROM commande', args=None, number_of_data=10)
 
-    return render_template('panel/index.html', commande_value=commande_value, list_commandes=list_commandes)
+    return render_template('panel/index.html', commande_value=commande_value,
+                           list_commandes=list_commandes)
 
 
 def panel_show_commande_cogs(database):
@@ -41,24 +43,36 @@ def panel_edit_commande_cogs(database):
     if request.cookies.get('token') != "LOGGIN-SUCCESS":
         return redirect(url_for('login'))
 
-    '''
-    Description du process:
-        1 - Entrer l'unique ID de la commande
-        2 - Affichage des détails de la commande
-        3 - Bouton confirmer le payement de la commande (si pas confirmer)
-        4 - Bouton confirmer la distribution (si payer et pas confirmer)
-        5 - Loop
-    '''
     if request.method == 'POST':
         uniqueID = request.form.get('uniqueID')
     else:
         uniqueID = None
 
     if uniqueID is None:
-        return render_template('panel/edit_commande.html', specifique_commande=None, uniqueID=None)  # Render la page avec le form
+        # Render la page avec le form
+        return render_template('panel/edit_commande.html', specifique_commande=None, uniqueID=None)
 
     elif uniqueID is not None:
         commande = database.select('''SELECT * FROM commande WHERE code_unique=%s''', uniqueID, 1)
-        return render_template('panel/edit_commande.html', specifique_commande=commande, uniqueID=uniqueID)
+        return render_template('panel/edit_commande.html', specifique_commande=commande,
+                               uniqueID=uniqueID)
 
     return 'Edit Command'
+
+
+def panel_edit_commande_back_cogs(database):
+    if request.cookies.get('token') != "LOGGIN-SUCCESS":
+        return redirect(url_for('login'))
+
+    is_paye = request.form.get('flexCheckPaye') is not None if True else False
+    is_distribue = request.form.get('flexCheckDistrib') is not None if True else False
+    is_prepare = request.form.get('flexCheckPrepa') is not None if True else False
+
+    database.exec("""UPDATE commande SET paye=%s, distribué=%s, prepare=%s WHERE code_unique=%s""",
+                  (is_paye, is_distribue, is_prepare, request.form.get('uniqueID')))
+
+    if is_paye:
+        database.exec("""UPDATE commande SET paye_at=CURRENT_TIMESTAMP WHERE code_unique=%s""",
+                      request.form.get('uniqueID'))
+
+    return redirect(url_for("panel_edit_commande"), code=307)
