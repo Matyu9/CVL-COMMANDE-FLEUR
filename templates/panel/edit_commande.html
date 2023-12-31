@@ -157,24 +157,25 @@
                                 <button onclick="showEdit()" class="btn btn-primary">Modifiier la commande</button>
                             </div>
                             <div id="edit"  hidden="hidden">
-                                <form>
+                                <form method="post" action="{{ url_for("panel_edit_commande_back") }}">
+                                    <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="{{ specifique_commande[13] }}"/>
                                     <div class="form-check-edit-commande" style="padding-bottom: 1rem">
-                                        <label class="form-check-label" for="flexCheckDistrib">
-                                            <strong style="color: white">Distribué : </strong>
+                                        <label class="form-check-label" for="flexCheckPrepa">
+                                            <strong style="color: white">Préparé : </strong>
                                         </label>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDistrib" style="margin-left: 15px" {% if specifique_commande[14] %} checked {% endif %}>
+                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckPrepa" style="margin-left: 15px" {% if specifique_commande[14] %} checked {% endif %}>
                                     </div><br>
                                     <div class="form-check-edit-commande" style="padding-bottom: 1rem">
                                         <label class="form-check-label" for="flexCheckPaye">
                                             <strong style="color: white">Payé : </strong>
                                         </label>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckPaye" style="margin-left: 15px" {% if specifique_commande[9] %} checked {% endif %}>
+                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckPaye" style="margin-left: 15px" {% if specifique_commande[9] %} checked {% endif %}>
                                     </div><br>
                                     <div class="form-check-edit-commande" style="padding-bottom: 1rem">
-                                        <label class="form-check-label" for="flexCheckPrepa">
-                                            <strong style="color: white">Préparé : </strong>
+                                        <label class="form-check-label" for="flexCheckDistrib">
+                                            <strong style="color: white">Distribué : </strong>
                                         </label>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckPrepa" style="margin-left: 15px" {% if specifique_commande[12] %} checked {% endif %}>
+                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckDistrib" style="margin-left: 15px" {% if specifique_commande[12] %} checked {% endif %}>
                                     </div>
                                     <br><br>
                                     <button type="submit" class="btn btn-primary">Modifier la commande</button>
