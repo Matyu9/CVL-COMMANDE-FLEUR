@@ -2,8 +2,8 @@ from datetime import datetime
 from flask import request, redirect, url_for, render_template
 
 
-def panel_index_cogs(database):
-    if request.cookies.get('token') != "LOGGIN-SUCCESS":
+def panel_index_cogs(database, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
     commande_value = {
@@ -21,8 +21,8 @@ def panel_index_cogs(database):
                            list_commandes=list_commandes)
 
 
-def panel_show_commande_cogs(database):
-    if request.cookies.get('token') != "LOGGIN-SUCCESS":
+def panel_show_commande_cogs(database, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
     list_commandes = database.select('SELECT * FROM commande', None)
@@ -30,8 +30,8 @@ def panel_show_commande_cogs(database):
     return render_template('panel/show_commande.html', list_commandes=list_commandes)
 
 
-def panel_show_specifique_commande_cogs(database, id):
-    if request.cookies.get('token') != "LOGGIN-SUCCESS":
+def panel_show_specifique_commande_cogs(database, id, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
     specifique_commande = database.select('''SELECT * FROM commande WHERE id=%s''', id, number_of_data=1)
@@ -39,8 +39,8 @@ def panel_show_specifique_commande_cogs(database, id):
     return render_template('panel/show_special_commande.html', specifique_commande=specifique_commande)
 
 
-def panel_edit_commande_cogs(database):
-    if request.cookies.get('token') != "LOGGIN-SUCCESS":
+def panel_edit_commande_cogs(database, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
     if request.method == 'POST':
@@ -60,8 +60,8 @@ def panel_edit_commande_cogs(database):
     return 'Edit Command'
 
 
-def panel_edit_commande_back_cogs(database):
-    if request.cookies.get('token') != "LOGGIN-SUCCESS":
+def panel_edit_commande_back_cogs(database, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
     is_paye = request.form.get('flexCheckPaye') is not None if True else False

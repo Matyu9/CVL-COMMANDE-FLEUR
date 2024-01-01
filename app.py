@@ -10,7 +10,7 @@ import json
 
 file_path = os.path.abspath(os.path.join(os.getcwd(), "config.json"))
 
-# Lecture du fichier roph JSON
+# Lecture du fichier JSON
 with open(file_path, 'r') as file:
     config_data = json.load(file)
 
@@ -38,32 +38,32 @@ def commande():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    return login_cogs(config_data['login_password'])
+    return login_cogs(config_data['login_password'], config_data['login_cookie'])
 
 
 @app.route('/panel', methods=['POST', 'GET'])
 def panel_home():
-    return panel_index_cogs(database)
+    return panel_index_cogs(database, config_data['login_cookie'])
 
 
 @app.route('/panel/show_commande', methods=['POST', 'GET'])
 def panel_show_commande():
-    return panel_show_commande_cogs(database)
+    return panel_show_commande_cogs(database, config_data['login_cookie'])
 
 
 @app.route('/panel/show_commande/<id>', methods=['POST', 'GET'])
 def panel_show_specifique_commande(id):
-    return panel_show_specifique_commande_cogs(database, id)
+    return panel_show_specifique_commande_cogs(database, id, config_data['login_cookie'])
 
 
 @app.route('/panel/edit_commande', methods=['POST', 'GET'])
 def panel_edit_commande():
-    return panel_edit_commande_cogs(database)
+    return panel_edit_commande_cogs(database, config_data['login_cookie'])
 
 
 @app.route('/panel/edit_commande/edit', methods=['POST'])
 def panel_edit_commande_back():
-    return panel_edit_commande_back_cogs(database)
+    return panel_edit_commande_back_cogs(database, config_data['login_cookie'])
 
 
 if __name__ == '__main__':
