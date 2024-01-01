@@ -42,8 +42,8 @@ Apache 2
 
 ### Aperçus
 
-![Page de commande](http://url/to/img.png)
-![Page d'accueil du panel](http://url/to/img.png)
-![Page des commandes du panel](http://url/to/img.png)
-![Page de modification des commandes du panel](http://url/to/img.png)
+![Page de commande](./image/page-acquisition-commande.png)
+![Page d'accueil du panel](./image/page-panel-accueil.png)
+![Page des commandes du panel](./image/page-panel-commande.png)
+![Page de modification des commandes du panel](./image/page-panel-edit-commande.png)
 
