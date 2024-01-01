@@ -41,3 +41,9 @@ Pour fonctionner, une base de données MySQL/MariaDB doit être utilisé.
 Apache 2
 
 ### Aperçus
+
+![Page de commande](http://url/to/img.png)
+![Page d'accueil du panel](http://url/to/img.png)
+![Page des commandes du panel](http://url/to/img.png)
+![Page de modification des commandes du panel](http://url/to/img.png)
+
