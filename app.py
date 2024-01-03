@@ -66,5 +66,10 @@ def panel_edit_commande_back():
     return panel_edit_commande_back_cogs(database, config_data['login_cookie'])
 
 
+@app.route('/panel/chart')
+def panel_chart():
+    return panel_chart_cogs(database, config_data['login_cookie'])
+
+
 if __name__ == '__main__':
     app.run(port=4998, host='0.0.0.0')

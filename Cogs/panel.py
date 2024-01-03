@@ -76,3 +76,10 @@ def panel_edit_commande_back_cogs(database, cookie_config_value):
                       request.form.get('uniqueID'))
 
     return redirect(url_for("panel_edit_commande"), code=307)
+
+
+def panel_chart_cogs(database, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
+        return redirect(url_for('login'))
+
+    return render_template("")
