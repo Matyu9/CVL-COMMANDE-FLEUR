@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script type="application/javascript" src="{{ url_for("static", filename="js/modal_commande.js") }}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CVL - Saint Valentin - 2024</title>
 </head>
@@ -129,7 +130,25 @@
                 <textarea class="textarea" style="margin-bottom: 1em" name = 'message' required maxlength="150"></textarea>
             </label>
             <br>
-            <button class="button is-primary" type="submit">Envoyer ma demande!</button>
+            <div id="modal-js-example" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title bg-warning text-danger">Attention</p>
+                        <button class="delete" aria-label="close" type="button"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <p>Attention, en appuyant sur le bouton "envoyer ma demande", vous vous <strong>engagez à récupérer votre fleur auprès du CVL</strong>. Toute commande, avec un nom/prénom inapproprié d'acheteur et/ou nom/prénom inapproprié pour le bénéficiaire et/ou un message incorrect, sera <strong>refuser</strong> et <strong>ne sera pas prise en compte</strong></p>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button class="button is-primary" type="submit">Envoyer ma demande!</button>
+                        <button class="button" type="button">Fermer</button>
+                    </footer>
+                </div>
+            </div>
+            <button id="js-modal-trigger" data-target="modal-js-example" type="button" class="button is-primary">
+                Valider la demande
+            </button>
         </form>
     </div>
 </body>
