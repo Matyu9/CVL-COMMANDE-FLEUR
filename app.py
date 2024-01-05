@@ -3,7 +3,8 @@ from cantinaUtils.Database import DataBase
 from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
 from Cogs.panel import (panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs,
-                        panel_edit_commande_cogs, panel_edit_commande_back_cogs, panel_chart_cogs)
+                        panel_edit_commande_cogs, panel_edit_commande_back_cogs, panel_chart_cogs,
+                        panel_delete_commande_cogs)
 import os
 import json
 
@@ -47,8 +48,8 @@ def panel_home():
 
 
 @app.route('/panel/show_commande', methods=['POST', 'GET'])
-def panel_show_commande():
-    return panel_show_commande_cogs(database, config_data['login_cookie'])
+def panel_show_commande(alert=None):
+    return panel_show_commande_cogs(database, config_data['login_cookie'], alert)
 
 
 @app.route('/panel/show_commande/<id>', methods=['POST', 'GET'])
@@ -64,6 +65,11 @@ def panel_edit_commande():
 @app.route('/panel/edit_commande/edit', methods=['POST'])
 def panel_edit_commande_back():
     return panel_edit_commande_back_cogs(database, config_data['login_cookie'])
+
+
+@app.route('/panel/delete_commande/', methods=['POST'])
+def panel_delete_commande():
+    return panel_delete_commande_cogs(database, config_data['login_cookie'])
 
 
 @app.route('/panel/chart')
