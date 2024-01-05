@@ -190,9 +190,17 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
+    <script>alert({{ alert }})</script>
+        <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            La commande à été supprimé avec succès
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+        </div>
     <!-- Modal, Delete Commande -->
     {% if alert == 'delete-success' %}
-        <div class="modal">
+        <div class="modal is-active">
             <div class="modal-background"></div>
             <div class="modal-card">
                 <header class="modal-card-head">
@@ -200,7 +208,7 @@
                     <button class="delete" aria-label="close"></button>
                 </header>
                 <section class="modal-card-body">
-                    La commande à été supprimé avec succès
+
                 </section>
                 <footer class="modal-card-foot">
                     <button class="button">Cancel</button>
@@ -223,6 +231,6 @@
 
     <!-- Template Javascript -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modale_commande.js') }}"></script>
 </body>
-
 </html>
