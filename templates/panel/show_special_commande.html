@@ -107,13 +107,19 @@
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div class="d-flex align-items-center mb-4" style="position: relative;">
                         <h4 class="mb-0">Commande numéro {{ specifique_commande[0] }}</h4>
-                        <form action="{{ url_for('panel_edit_commande') }}" method="post">
+                        <form action="{{ url_for('panel_edit_commande') }}" method="post" style="position: absolute; right: 10px; top: 5px;">
                             <label>
                                 <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="{{ specifique_commande[13] }}"/>
                             </label>
                             <button type="submit" class="btn btn-primary">Modifier la commande</button>
+                        </form>
+                        <form action="{{ url_for('panel_delete_commande') }}" method="post" style="position: absolute; right: 225px; top: 5px;">
+                            <label>
+                                <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="{{ specifique_commande[13] }}"/>
+                            </label>
+                            <button type="submit" class="btn btn-primary">Supprimer la commande</button>
                         </form>
                     </div>
                     <div class="align-items-center justify-content-between mb-4">

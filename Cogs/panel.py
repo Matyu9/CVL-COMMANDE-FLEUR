@@ -27,7 +27,7 @@ def panel_show_commande_cogs(database, cookie_config_value):
 
     list_commandes = database.select('SELECT * FROM commande', None)
 
-    return render_template('panel/show_commande.html', list_commandes=list_commandes)
+    return render_template('panel/show_commande.html', list_commandes=list_commandes, alert=request.args.get('alert'))
 
 
 def panel_show_specifique_commande_cogs(database, id, cookie_config_value):
@@ -78,8 +78,16 @@ def panel_edit_commande_back_cogs(database, cookie_config_value):
     return redirect(url_for("panel_edit_commande"), code=307)
 
 
+def panel_delete_commande_cogs(database, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
+        return redirect(url_for('login'))
+
+    commande = database.exec('''DELETE FROM commande WHERE code_unique=%s''', request.form.get('uniqueID'))
+    return redirect(url_for('panel_show_commande', alert='delete-success'))
+
+
 def panel_chart_cogs(database, cookie_config_value):
     if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
-    return render_template("")
+    return 'Chipi Chipi Chapa Chapa Doubi Doubi Daba Daba'
