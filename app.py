@@ -48,8 +48,8 @@ def panel_home():
 
 
 @app.route('/panel/show_commande', methods=['POST', 'GET'])
-def panel_show_commande(alert=None):
-    return panel_show_commande_cogs(database, config_data['login_cookie'], alert)
+def panel_show_commande():
+    return panel_show_commande_cogs(database, config_data['login_cookie'])
 
 
 @app.route('/panel/show_commande/<id>', methods=['POST', 'GET'])

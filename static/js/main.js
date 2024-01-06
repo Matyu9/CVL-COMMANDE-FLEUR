@@ -10,8 +10,8 @@
         }, 1);
     };
     spinner();
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
@@ -85,5 +85,26 @@
         }
     });
 
-    
+
 })(jQuery);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Fonction pour fermer le modal
+  function closeModal() {
+    const $modal = document.querySelector('.modal');
+    $modal.classList.remove('is-active');
+  }
+
+  // Fermer le modal en cliquant sur .modal-background ou .modal-close
+  document.querySelectorAll('.modal-background, .modal-close').forEach(($el) => {
+    $el.addEventListener('click', closeModal);
+  });
+
+  // Fermer le modal en appuyant sur la touche Escape
+  document.addEventListener('keydown', (event) => {
+    if (event.code === 'Escape') {
+      closeModal();
+    }
+  });
+});

@@ -21,13 +21,13 @@ def panel_index_cogs(database, cookie_config_value):
                            list_commandes=list_commandes)
 
 
-def panel_show_commande_cogs(database, cookie_config_value, alert=None):
+def panel_show_commande_cogs(database, cookie_config_value):
     if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
     list_commandes = database.select('SELECT * FROM commande', None)
 
-    return render_template('panel/show_commande.html', list_commandes=list_commandes, alert=alert)
+    return render_template('panel/show_commande.html', list_commandes=list_commandes, alert=request.args.get('alert'))
 
 
 def panel_show_specifique_commande_cogs(database, id, cookie_config_value):

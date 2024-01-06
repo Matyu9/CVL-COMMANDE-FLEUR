@@ -30,6 +30,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <script>console.log('{{ alert }}')</script>
 </head>
 
 <body>
@@ -97,7 +98,12 @@
                 </div>
             </nav>
             <!-- Navbar End -->
-
+            {% if alert == 'delete-success' %}
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <i class="fa fa-exclamation-circle me-2"></i>La commande a bien été supprimé!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
 
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
@@ -189,33 +195,6 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
-
-    <script>alert({{ alert }})</script>
-        <div class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-            La commande à été supprimé avec succès
-        </div>
-        <button class="modal-close is-large" aria-label="close"></button>
-        </div>
-    <!-- Modal, Delete Commande -->
-    {% if alert == 'delete-success' %}
-        <div class="modal is-active">
-            <div class="modal-background"></div>
-            <div class="modal-card">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Commande supprimé</p>
-                    <button class="delete" aria-label="close"></button>
-                </header>
-                <section class="modal-card-body">
-
-                </section>
-                <footer class="modal-card-foot">
-                    <button class="button">Cancel</button>
-                </footer>
-            </div>
-        </div>
-    {% endif %}
 
 
     <!-- JavaScript Libraries -->
