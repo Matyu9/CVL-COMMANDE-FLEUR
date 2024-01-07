@@ -90,4 +90,19 @@ def panel_chart_cogs(database, cookie_config_value):
     if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
-    return 'Chipi Chipi Chapa Chapa Doubi Doubi Daba Daba'
+    # Get les datas en fonction des classes
+    commande = database.select('''SELECT * FROM commande''', args=None)
+    customer_by_classes = {
+        'seconde': 0,
+        'premiere': 0,
+        'term': 0
+    }
+    for element in commande:
+        if element[6].startswith('2'):
+            customer_by_classes['seconde'] += 1
+        elif element[6].startswith('1'):
+            customer_by_classes['premiere'] += 1
+        elif element[6].startswith('T'):
+            customer_by_classes['term'] += 1
+
+    return render_template('panel/chart.html', customer_by_classes=customer_by_classes)
