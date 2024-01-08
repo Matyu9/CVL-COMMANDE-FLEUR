@@ -97,6 +97,7 @@ def panel_chart_cogs(database, cookie_config_value):
         'premiere': 0,
         'term': 0
     }
+    nb_command_per_day = {}
     for element in commande:
         if element[6].startswith('2'):
             customer_by_classes['seconde'] += 1
@@ -105,4 +106,12 @@ def panel_chart_cogs(database, cookie_config_value):
         elif element[6].startswith('T'):
             customer_by_classes['term'] += 1
 
-    return render_template('panel/chart.html', customer_by_classes=customer_by_classes)
+        date = element[11].strftime("%Y-%m-%d").encode('utf-8').decode('unicode-escape')    # Récupération de la date sans l'heure
+        if date in nb_command_per_day:
+            nb_command_per_day[date] += 1
+        else:
+            nb_command_per_day[date] = 1
+
+    print(nb_command_per_day)
+    return render_template('panel/chart.html', customer_by_classes=customer_by_classes,
+                           nb_command_per_day=nb_command_per_day)
