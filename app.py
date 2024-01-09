@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask
 from cantinaUtils.Database import DataBase
+from Cogs.home import home_cogs
 from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
 from Cogs.panel import (panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs,
@@ -25,11 +26,13 @@ nom_envoyeur TEXT NOT NULL, prenom_envoyeur TEXT NOT NULL, classe_envoyeur TEXT 
 need_to_be_receive_by_cvl BOOL, paye BOOL DEFAULT FALSE, paye_at TIMESTAMP, 
 commander_le TIMESTAMP DEFAULT CURRENT_TIMESTAMP, distribué BOOL DEFAULT FALSE NOT NULL, code_unique TEXT, 
 prepare BOOL DEFAULT FALSE)""", None)
+database.exec("""CREATE TABLE IF NOT EXISTS telemetry(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+nom_telemetry TEXT NOT NULL, data_telemetry TEXT NOT NULL)""", None)
 
 
 @app.route('/')
 def home():
-    return render_template('home-no-login.html')
+    return home_cogs(database)
 
 
 @app.route('/commande', methods=['POST'])
