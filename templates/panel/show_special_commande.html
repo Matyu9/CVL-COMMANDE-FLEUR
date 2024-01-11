@@ -115,11 +115,11 @@
                             </label>
                             <button type="submit" class="btn btn-primary">Modifier la commande</button>
                         </form>
-                        <form action="{{ url_for('panel_delete_commande') }}" method="post" style="position: absolute; right: 225px; top: 5px;">
+                        <form action="{{ url_for('panel_delete_commande') }}" method="post" style="position: absolute; right: 225px; top: 5px;" id="delete_commande">
                             <label>
                                 <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="{{ specifique_commande[13] }}"/>
                             </label>
-                            <button type="submit" class="btn btn-primary">Supprimer la commande</button>
+                            <button type="button" class="btn btn-primary" onclick="delete_commande()">Supprimer la commande</button>
                         </form>
                     </div>
                     <div class="align-items-center justify-content-between mb-4">
@@ -193,6 +193,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/delete_commande.js') }}"></script>
 </body>
 
 </html>
