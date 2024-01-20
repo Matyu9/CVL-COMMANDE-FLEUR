@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <script type="application/javascript" src="{{ url_for("static", filename="js/modal_commande.js") }}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .textarea {
+            min-width: 0;
+        }
+    </style>
     <title>CVL - Saint Valentin - 2024</title>
 </head>
 <body class="has-text-centered">
@@ -13,11 +18,11 @@
         <form action="{{ url_for('commande') }}" method="post" style="padding-bottom: 15px">
             <h3 class="is-size-4">Nom du destinataire:</h3>
             <label>
-                <input class="input is" style="margin-bottom: 1em"  type = 'text' name = 'nd' required/>
+                <input class="input is" style="margin-bottom: 1em; width: calc(100% - 100px) !important;"  type = 'text' name = 'nd' required/>
             </label>
             <h3 class="is-size-4">Prénom du destinataire:</h3>
             <label>
-                <input class="input" style="margin-bottom: 1em"  type = 'text' name = 'pd' required/>
+                <input class="input" style="margin-bottom: 1em; width: calc(100% - 100px) !important;"  type = 'text' name = 'pd' required/>
             </label>
             <h3 class="is-size-4">Classe du destinataire:</h3>
             <label>
@@ -66,11 +71,11 @@
             </label>
             <h3 class="is-size-4">Votre Nom:</h3>
             <label>
-                <input class="input is" style="margin-bottom: 1em"  type = 'text' name = 'pe' required/>
+                <input class="input is" style="margin-bottom: 1em; width: calc(100% - 100px) !important;"  type = 'text' name = 'pe' required/>
             </label>
             <h3 class="is-size-4">Votre Prénom:</h3>
             <label>
-                <input class="input is" style="margin-bottom: 1em"  type = 'text' name = 'ne' required/>
+                <input class="input is" style="margin-bottom: 1em; width: calc(100% - 100px) !important;"  type = 'text' name = 'ne' required/>
             </label>
             <h3 class="is-size-4">Votre Classe:</h3>
             <label>
@@ -127,7 +132,7 @@
             </div>
             <h3 class="is-size-4" >Message pour le destinataire:</h3>
             <label>
-                <textarea class="textarea" style="margin-bottom: 1em" name = 'message' required maxlength="150"></textarea>
+                <textarea class="textarea" style="margin-bottom: 1em; margin-left: 50px; width: calc(100% - 100px) !important;" name = 'message' required maxlength="150"></textarea>
             </label>
             <br>
             <div id="modal-js-example" class="modal">
