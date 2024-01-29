@@ -114,3 +114,17 @@ def panel_chart_cogs(database, cookie_config_value):
     print(nb_command_per_day)
     return render_template('panel/chart.html', customer_by_classes=customer_by_classes,
                            nb_command_per_day=nb_command_per_day)
+
+
+def panel_stock_cogs(database, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
+        return redirect(url_for('login'))
+
+    stock_value = {
+        'nb_fleur1_start': database.select(body='SELECT item_beggining_value FROM stock WHERE item_name="fleur-1"',
+                                           args=None, number_of_data=1)[0],
+        'nb_fleur1_restante': database.select(body='SELECT item_current_value FROM stock WHERE item_name="fleur-1"',
+                                              args=None, number_of_data=1)[0]
+    }
+
+    return render_template('panel/stock.html', stock_value=stock_value)
