@@ -7,7 +7,7 @@ def panel_index_cogs(database, cookie_config_value):
 
     commande_value = {
         'nb_commande': len(database.select(body='SELECT * FROM commande', args=None)),
-        'nb_commande_distribuée': len(database.select(body='SELECT * FROM commande WHERE distribué=TRUE', args=None)),
+        'nb_fleur_restante': len(database.select(body='SELECT * FROM stock WHERE item_name="fleur-1"', args=None)),
         'nb_commande_impayée': len(database.select(body='SELECT * FROM commande WHERE paye=FALSE', args=None)),
         'nb_commande_a_distrib_en_classe': len(database.select(body='SELECT * FROM commande WHERE paye=TRUE & '
                                                                     'commande.need_to_be_receive_by_cvl=TRUE',
