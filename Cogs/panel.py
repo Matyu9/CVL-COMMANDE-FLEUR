@@ -120,11 +120,12 @@ def panel_stock_cogs(database, cookie_config_value):
     if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
-    """stock_value = {
-        'nb_fleur1_start': database.select(body='SELECT item_beggining_value FROM stock WHERE item_name="fleur-1"',
-                                           args=None, number_of_data=1)[0],
-        'nb_fleur1_restante': database.select(body='SELECT item_current_value FROM stock WHERE item_name="fleur-1"',
-                                              args=None, number_of_data=1)[0]
-    }"""
+    data1 = database.select(body='SELECT item_beggining_value FROM stock WHERE item_name="fleur-1"', args=None, number_of_data=1)
+    data2 = database.select(body='SELECT item_current_value FROM stock WHERE item_name="fleur-1"', args=None, number_of_data=1)
+
+    stock_value = {
+        'nb_fleur1_start': data1[0] if data1 is not None else 'Aucune donnée',
+        'nb_fleur1_restante': data2[0] if data2 is not None else 'Aucune donnée'
+    }
 
     return render_template('panel/stock.html', stock_value=None)
