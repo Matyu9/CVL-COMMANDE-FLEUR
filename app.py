@@ -5,7 +5,7 @@ from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
 from Cogs.panel import (panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs,
                         panel_edit_commande_cogs, panel_edit_commande_back_cogs, panel_chart_cogs,
-                        panel_delete_commande_cogs, panel_stock_cogs, panel_stock_add_cogs)
+                        panel_delete_commande_cogs, panel_stock_cogs)
 import os
 import json
 
@@ -81,11 +81,6 @@ def panel_delete_commande():
 @app.route('/panel/stock', methods=['GET'])
 def panel_stock():
     return panel_stock_cogs(database, config_data['login_cookie'])
-
-
-@app.route('/panel/stock/add', methods=['POST'])
-def panel_stock_add():
-    return panel_stock_add_cogs(database, config_data['login_cookie'])
 
 
 @app.route('/panel/fast_sell/', methods=['POST', 'GET'])
