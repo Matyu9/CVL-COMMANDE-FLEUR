@@ -78,9 +78,14 @@ def panel_delete_commande():
     return panel_delete_commande_cogs(database, config_data['login_cookie'])
 
 
-@app.route('/panel/stock', methods=['POST', 'GET'])
+@app.route('/panel/stock', methods=['GET'])
 def panel_stock():
     return panel_stock_cogs(database, config_data['login_cookie'])
+
+
+@app.route('/panel/stock/add', methods=['POST', 'GET'])
+def panel_stock_add():
+    return panel_stock_add_cogs(database, config_data['login_cookie'])
 
 
 @app.route('/panel/chart')

@@ -100,56 +100,37 @@
 
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-line fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Nombre total de fleur</p>
-                                <h6 class="mb-0">{{ stock_value["nb_fleur1_start"] }}</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Fleur restante</p>
-                                <h6 class="mb-0">{{ stock_value["nb_fleur1_restante"] }}</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <!-- Sale & Revenue End -->
 
             <div class="container-fluid pt-4 px-4">
-                <button class="btn btn-primary" onclick="console.log('Pop up pour ajouter du stock')">Ajouter du stock</button>
-                <div class="bg-secondary text-center rounded p-4" hidden="hidden">
+                <div class="bg-secondary text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <h4 class="mb-0">Ajouter du stock</h4>
                         </div>
                         <div class="align-items-center justify-content-between mb-4">
+                            <h4><strong style="color: white">Code unique : </strong>{{ specifique_commande[13] }}</h4>
                             <div id="edit"  hidden="hidden">
                                 <form method="post" action="{{ url_for("panel_edit_commande_back") }}">
-                                    <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="}"/>
+                                    <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="{{ specifique_commande[13] }}"/>
                                     <div class="form-check-edit-commande" style="padding-bottom: 1rem">
                                         <label class="form-check-label" for="flexCheckPrepa">
                                             <strong style="color: white">Préparé : </strong>
                                         </label>
-                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckPrepa" style="margin-left: 15px">
+                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckPrepa" style="margin-left: 15px" {% if specifique_commande[14] %} checked {% endif %}>
                                     </div><br>
                                     <div class="form-check-edit-commande" style="padding-bottom: 1rem">
                                         <label class="form-check-label" for="flexCheckPaye">
                                             <strong style="color: white">Payé : </strong>
                                         </label>
-                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckPaye" style="margin-left: 15px">
+                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckPaye" style="margin-left: 15px" {% if specifique_commande[9] %} checked {% endif %}>
                                     </div><br>
                                     <div class="form-check-edit-commande" style="padding-bottom: 1rem">
                                         <label class="form-check-label" for="flexCheckDistrib">
                                             <strong style="color: white">Distribué : </strong>
                                         </label>
-                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckDistrib" style="margin-left: 15px">
+                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckDistrib" style="margin-left: 15px" {% if specifique_commande[12] %} checked {% endif %}>
                                     </div>
                                     <br><br>
                                     <button type="submit" class="btn btn-primary">Modifier la commande</button>
