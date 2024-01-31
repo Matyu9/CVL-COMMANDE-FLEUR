@@ -7,7 +7,8 @@ def panel_index_cogs(database, cookie_config_value):
 
     commande_value = {
         'nb_commande': len(database.select(body='SELECT * FROM commande', args=None)),
-        'nb_fleur_restante': len(database.select(body='SELECT * FROM stock WHERE item_name="fleur-1"', args=None)),
+        'nb_fleur_restante': database.select(body='SELECT item_current_value FROM stock WHERE item_name="fleur-1"',
+                                             args=None, number_of_data=1)[0],
         'nb_commande_impayée': len(database.select(body='SELECT * FROM commande WHERE paye=FALSE', args=None)),
         'nb_commande_a_distrib_en_classe': len(database.select(body='SELECT * FROM commande WHERE paye=TRUE & '
                                                                     'commande.need_to_be_receive_by_cvl=TRUE',
@@ -136,8 +137,9 @@ def panel_stock_cogs(database, cookie_config_value):
         return render_template('panel/stock.html', stock_value=stock_value)
 
     elif request.method == 'POST':
-        database.exec('UPDATE stock SET item_current_value=item_current_value+%s WHERE item_name=%s',
-                      (request.form.get('item_to_add'), request.form.get('item_name')))
+        database.exec('UPDATE stock SET item_current_value=item_current_value+%s, '
+                      'item_beggining_value=item_beggining_value+%s, last_update=CURRENT_TIMESTAMP WHERE item_name=%s',
+                      (request.form.get('item_to_add'), request.form.get('item_to_add'), request.form.get('item_name')))
 
         return redirect(url_for('panel_home'))
 
