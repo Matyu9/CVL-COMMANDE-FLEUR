@@ -88,6 +88,11 @@ def panel_stock_add():
     return panel_stock_add_cogs(database, config_data['login_cookie'])
 
 
+@app.route('/panel/fast_sell/', methods=['POST', 'GET'])
+def panel_fast_sell():
+    return "fast-sell"  # TODO
+
+
 @app.route('/panel/chart')
 def panel_chart():
     return panel_chart_cogs(database, config_data['login_cookie'])

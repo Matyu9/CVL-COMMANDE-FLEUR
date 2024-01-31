@@ -63,7 +63,7 @@
                     <a href="{{ url_for('panel_home') }}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Page d'accueil</a><br>
                     <a href="{{ url_for('panel_show_commande') }}" class="nav-item nav-link"><i class="fa-solid fa-database"></i>Les commandes</a><br>
                     <a href="{{ url_for('panel_edit_commande') }}" class="nav-item nav-link"><i class="fa-solid fa-pen-to-square"></i>Modifier une commande</a><br>
-                    <a href="{{ url_for('panel_stock') }}" class="nav-item nav-link"><i class="fa-solid fa-pen-to-square"></i>Stock</a><br>
+                    <a href="{{ url_for('panel_fast_sell') }}" class="nav-item nav-link"><i class="fa-solid fa-pen-to-square"></i>Commande rapide</a><br>
                     <a href="{{ url_for('panel_chart') }}" class="nav-item nav-link"><i class="fa-solid fa-pen-to-square"></i>Des graphs en tout genre</a>
                 </div>
             </nav>
@@ -147,8 +147,8 @@
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div id="button-bar">
-                    <button class="btn btn-primary" id="btn-edit-stock" onclick="showEditStock()">Ajouter du stock</button>
-                    <button class="btn btn-primary" id="btn-edit-stock" onclick="alert('TODO: Prendre une commande rapide')">Prendre une commande rapide</button>
+                    <button class="btn btn-primary" style="margin-top: 1em; margin-right: .5em" id="btn-edit-stock" onclick="window.href='{{ url_for('panel_stock') }}'">Ajouter du stock</button>
+                    <button class="btn btn-primary" style="margin-top: 1em; margin-right: .5em" id="btn-edit-stock" onclick="alert('TODO: Prendre une commande rapide')">Prendre une commande rapide</button>
                 </div>
                 <br>
                 <div class="bg-secondary text-center rounded p-4">
