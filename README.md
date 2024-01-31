@@ -47,3 +47,8 @@ Apache 2
 ![Page des commandes du panel](./image/page-panel-commande.png)
 ![Page de modification des commandes du panel](./image/page-panel-edit-commande.png)
 
+### TODO:
+ - Commande rapide
+ - Stock
+ - Ajouter un socket pour une actualisation auto et instantanée des stocks.
+

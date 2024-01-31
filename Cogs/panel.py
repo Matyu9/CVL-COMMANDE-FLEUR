@@ -7,7 +7,8 @@ def panel_index_cogs(database, cookie_config_value):
 
     commande_value = {
         'nb_commande': len(database.select(body='SELECT * FROM commande', args=None)),
-        'nb_commande_distribuée': len(database.select(body='SELECT * FROM commande WHERE distribué=TRUE', args=None)),
+        'nb_fleur_restante': database.select(body='SELECT item_current_value FROM stock WHERE item_name="fleur-1"',
+                                             args=None, number_of_data=1)[0],
         'nb_commande_impayée': len(database.select(body='SELECT * FROM commande WHERE paye=FALSE', args=None)),
         'nb_commande_a_distrib_en_classe': len(database.select(body='SELECT * FROM commande WHERE paye=TRUE & '
                                                                     'commande.need_to_be_receive_by_cvl=TRUE',
@@ -15,9 +16,10 @@ def panel_index_cogs(database, cookie_config_value):
     }
 
     list_commandes = database.select(body='SELECT * FROM commande', args=None, number_of_data=10)
+    status_commande = database.select(body='SELECT * FROM config WHERE config_name="can_order"', args=None)
 
     return render_template('panel/index.html', commande_value=commande_value,
-                           list_commandes=list_commandes)
+                           list_commandes=list_commandes, status_commande=status_commande)
 
 
 def panel_show_commande_cogs(database, cookie_config_value):
@@ -63,16 +65,20 @@ def panel_edit_commande_back_cogs(database, cookie_config_value):
     if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
-    is_paye = request.form.get('flexCheckPaye') is not None if True else False
-    is_distribue = request.form.get('flexCheckDistrib') is not None if True else False
-    is_prepare = request.form.get('flexCheckPrepa') is not None if True else False
+    action = request.form.get('action')
 
-    database.exec("""UPDATE commande SET paye=%s, distribué=%s, prepare=%s WHERE code_unique=%s""",
-                  (is_paye, is_distribue, is_prepare, request.form.get('uniqueID')))
-
-    if is_paye:
+    if action == 'paye':
+        database.exec("""UPDATE commande SET paye=%s WHERE code_unique=%s""",
+                      (1, request.form.get('uniqueID')))
         database.exec("""UPDATE commande SET paye_at=CURRENT_TIMESTAMP WHERE code_unique=%s""",
                       request.form.get('uniqueID'))
+        database.exec("""UPDATE stock SET item_current_value=item_current_value-1 WHERE item_name='fleur-1'""", None)
+    elif action == 'distrib':
+        database.exec("""UPDATE commande SET distribué=%s WHERE code_unique=%s""",
+                      (1, request.form.get('uniqueID')))
+    elif action == 'prepa':
+        database.exec("""UPDATE commande SET prepare=%s WHERE code_unique=%s""",
+                      (1, request.form.get('uniqueID')))
 
     return redirect(url_for("panel_edit_commande"), code=307)
 
@@ -114,3 +120,39 @@ def panel_chart_cogs(database, cookie_config_value):
     print(nb_command_per_day)
     return render_template('panel/chart.html', customer_by_classes=customer_by_classes,
                            nb_command_per_day=nb_command_per_day)
+
+
+def panel_stock_cogs(database, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
+        return redirect(url_for('login'))
+
+    if request.method == 'GET':
+        data1 = database.select(body='SELECT item_beggining_value FROM stock WHERE item_name="fleur-1"', args=None,
+                                number_of_data=1)
+        data2 = database.select(body='SELECT item_current_value FROM stock WHERE item_name="fleur-1"', args=None,
+                                number_of_data=1)
+        data3 = database.select(body='SELECT item_name FROM stock', args=None)
+
+        stock_value = {
+            'nb_fleur1_start': data1[0] if data1 is not None else 'Aucune donnée',
+            'nb_fleur1_restante': data2[0] if data2 is not None else 'Aucune donnée',
+            'item_name': data3
+        }
+
+        return render_template('panel/stock.html', stock_value=stock_value)
+
+    elif request.method == 'POST':
+        database.exec('UPDATE stock SET item_current_value=item_current_value+%s, '
+                      'item_beggining_value=item_beggining_value+%s, last_update=CURRENT_TIMESTAMP WHERE item_name=%s',
+                      (request.form.get('item_to_add'), request.form.get('item_to_add'), request.form.get('item_name')))
+
+        return redirect(url_for('panel_home'))
+
+
+def panel_status_order_cogs(database, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
+        return redirect(url_for('login'))
+
+    database.exec("""UPDATE config SET config_data=NOT config_data WHERE config_name='can_order'""", None)
+
+    return redirect(url_for('panel_home'))

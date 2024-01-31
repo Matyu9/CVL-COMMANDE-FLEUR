@@ -63,6 +63,7 @@
                     <a href="{{ url_for('panel_home') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Page d'accueil</a><br>
                     <a href="{{ url_for('panel_show_commande') }}" class="nav-item nav-link active"><i class="fa-solid fa-database"></i>Les commandes</a><br>
                     <a href="{{ url_for('panel_edit_commande') }}" class="nav-item nav-link"><i class="fa-solid fa-pen-to-square"></i>Modifier une commande</a><br>
+                    <a href="{{ url_for('panel_fast_sell') }}" class="nav-item nav-link"><i class="fa-solid fa-pen-to-square"></i>Commande rapide</a><br>
                     <a href="{{ url_for('panel_chart') }}" class="nav-item nav-link"><i class="fa-solid fa-pen-to-square"></i>Des graphs en tout genre</a>
                 </div>
             </nav>
@@ -123,7 +124,7 @@
                             <button type="button" class="btn btn-primary" onclick="delete_commande()">Supprimer la commande</button>
                         </form>
                     </div>
-                    <div class="align-items-center justify-content-between mb-4">
+                    <div class="align-items-center justify-content-between mb-4" style="padding-top: 10px">
                         <p><strong style="color: white">Identifiant : </strong>{{ specifique_commande[0] }}</p>
                         <p><strong style="color: white">Nom + Prénom de l'auteur : </strong>{{ specifique_commande[4] }} {{ specifique_commande[5] }}</p>
                         <p><strong style="color: white">Classe de l'auteur : </strong>{{ specifique_commande[6] }}</p>
