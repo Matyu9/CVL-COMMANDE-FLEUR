@@ -64,16 +64,22 @@ def panel_edit_commande_back_cogs(database, cookie_config_value):
     if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
-    is_paye = request.form.get('flexCheckPaye') is not None if True else False
-    is_distribue = request.form.get('flexCheckDistrib') is not None if True else False
-    is_prepare = request.form.get('flexCheckPrepa') is not None if True else False
+    action = request.form.get('action')
+    print('-----------------')
+    print(action)
 
-    database.exec("""UPDATE commande SET paye=%s, distribué=%s, prepare=%s WHERE code_unique=%s""",
-                  (is_paye, is_distribue, is_prepare, request.form.get('uniqueID')))
-
-    if is_paye:
+    if action == 'paye':
+        database.exec("""UPDATE commande SET paye=%s WHERE code_unique=%s""",
+                      (1, request.form.get('uniqueID')))
         database.exec("""UPDATE commande SET paye_at=CURRENT_TIMESTAMP WHERE code_unique=%s""",
                       request.form.get('uniqueID'))
+        database.exec("""UPDATE stock SET item_current_value=item_current_value-1 WHERE item_name='fleur-1'""", None)
+    elif action == 'distrib':
+        database.exec("""UPDATE commande SET distribué=%s WHERE code_unique=%s""",
+                      (1, request.form.get('uniqueID')))
+    elif action == 'prepa':
+        database.exec("""UPDATE commande SET prepare=%s WHERE code_unique=%s""",
+                      (1, request.form.get('uniqueID')))
 
     return redirect(url_for("panel_edit_commande"), code=307)
 

@@ -151,8 +151,8 @@
                             <h4><strong style="color: white">Code unique : </strong>{{ specifique_commande[13] }}</h4>
                             <h4><strong style="color: white">Plus d'information : </strong><a href="{{ url_for('panel_show_specifique_commande', id=specifique_commande[0]) }}">ici</a></h4>
                             <br>
-                            <h5><strong style="color: white; text-decoration: underline">Avancement : </strong></h5>
                             <div id="value">
+                                <h5><strong style="color: white; text-decoration: underline">Avancement : </strong></h5>
                                 <p><strong style="color: white">Préparé : </strong>{{ specifique_commande[14] }}</p>
                                 <p><strong style="color: white">Payé : </strong>{{ specifique_commande[9] }}</p>
                                 <p><strong style="color: white">Distribué : </strong>{{ specifique_commande[12] }}</p>
@@ -160,29 +160,35 @@
                                 <button onclick="showEdit()" class="btn btn-primary">Modifier la commande</button>
                             </div>
                             <div id="edit"  hidden="hidden">
-                                <form method="post" action="{{ url_for("panel_edit_commande_back") }}">
-                                    <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="{{ specifique_commande[13] }}"/>
+                                {% if specifique_commande[14] and not specifique_commande[9]%}
                                     <div class="form-check-edit-commande" style="padding-bottom: 1rem">
-                                        <label class="form-check-label" for="flexCheckPrepa">
-                                            <strong style="color: white">Préparé : </strong>
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckPrepa" style="margin-left: 15px" {% if specifique_commande[14] %} checked {% endif %}>
-                                    </div><br>
-                                    <div class="form-check-edit-commande" style="padding-bottom: 1rem">
-                                        <label class="form-check-label" for="flexCheckPaye">
-                                            <strong style="color: white">Payé : </strong>
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckPaye" style="margin-left: 15px" {% if specifique_commande[9] %} checked {% endif %}>
-                                    </div><br>
-                                    <div class="form-check-edit-commande" style="padding-bottom: 1rem">
-                                        <label class="form-check-label" for="flexCheckDistrib">
-                                            <strong style="color: white">Distribué : </strong>
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" value="" name="flexCheckDistrib" style="margin-left: 15px" {% if specifique_commande[12] %} checked {% endif %}>
+                                        <form action="{{ url_for('panel_edit_commande_back') }}" method="post">
+                                            <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="{{ specifique_commande[13] }}"/>
+                                            <input style="margin-bottom: 1em" class="form-control" type='hidden' name='action' value="paye"/>
+                                            <label class="form-check-label" for="flexCheckPrepa">
+                                                    <button type="submit" class="btn btn-primary">Valider le payement de la commande !</button>
+                                            </label>
+                                        </form>
                                     </div>
-                                    <br><br>
-                                    <button type="submit" class="btn btn-primary">Modifier la commande</button>
-                                </form>
+                                {% elif specifique_commande[14] and specifique_commande[9]%}
+                                    <div class="form-check-edit-commande" style="padding-bottom: 1rem">
+                                        <form action="{{ url_for('panel_edit_commande_back') }}" method="post">
+                                            <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="{{ specifique_commande[13] }}"/>
+                                            <input style="margin-bottom: 1em" class="form-control" type='hidden' name='action' value="distrib"/>
+                                            <label class="form-check-label" for="flexCheckPrepa">
+                                                    <button type="submit" class="btn btn-primary">Valider la distribution de la commande !</button>
+                                            </label>
+                                        </form>
+                                    </div>
+                                {% else %}
+                                    <div class="form-check-edit-commande" style="padding-bottom: 1rem">
+                                        <form action="{{ url_for('panel_edit_commande_back') }}" method="post">
+                                            <input style="margin-bottom: 1em" class="form-control" type='hidden' name='uniqueID' value="{{ specifique_commande[13] }}"/>
+                                            <input style="margin-bottom: 1em" class="form-control" type='hidden' name='action' value="prepa"/>
+                                            <button type="submit" class="btn btn-primary">Valider la préparation de la commande !</button>
+                                        </form>
+                                    </div><br>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
