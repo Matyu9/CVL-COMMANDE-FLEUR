@@ -124,10 +124,12 @@ def panel_stock_cogs(database, cookie_config_value):
                             number_of_data=1)
     data2 = database.select(body='SELECT item_current_value FROM stock WHERE item_name="fleur-1"', args=None,
                             number_of_data=1)
+    data3 = database.select(body='SELECT item_name FROM stock', args=None)
 
     stock_value = {
         'nb_fleur1_start': data1[0] if data1 is not None else 'Aucune donnée',
-        'nb_fleur1_restante': data2[0] if data2 is not None else 'Aucune donnée'
+        'nb_fleur1_restante': data2[0] if data2 is not None else 'Aucune donnée',
+        'item_name': data3
     }
 
     return render_template('panel/stock.html', stock_value=stock_value)

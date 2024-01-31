@@ -5,7 +5,7 @@ from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
 from Cogs.panel import (panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs,
                         panel_edit_commande_cogs, panel_edit_commande_back_cogs, panel_chart_cogs,
-                        panel_delete_commande_cogs, panel_stock_cogs)
+                        panel_delete_commande_cogs, panel_stock_cogs, panel_stock_add_cogs)
 import os
 import json
 
