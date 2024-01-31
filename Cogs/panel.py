@@ -139,5 +139,8 @@ def panel_stock_add_cogs(database, cookie_config_value):
     if request.cookies.get('token') != cookie_config_value:
         return redirect(url_for('login'))
 
-    return render_template('panel/stock_add.html')
+    database.exec('UPDATE stock SET item_current_value=item_current_value+%s WHERE item_name=%s',
+                  (request.form.get('item_to_add'), request.form.get('item_name')))
+
+    return redirect(url_for('panel_home', ))
 

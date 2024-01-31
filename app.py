@@ -83,7 +83,7 @@ def panel_stock():
     return panel_stock_cogs(database, config_data['login_cookie'])
 
 
-@app.route('/panel/stock/add', methods=['POST', 'GET'])
+@app.route('/panel/stock/add', methods=['POST'])
 def panel_stock_add():
     return panel_stock_add_cogs(database, config_data['login_cookie'])
 
