@@ -140,6 +140,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <!-- Sale & Revenue End -->
@@ -149,6 +150,11 @@
                 <div id="button-bar">
                     <button class="btn btn-primary" style="margin-top: 1em; margin-right: .5em" id="btn-edit-stock" onclick="window.location='{{ url_for('panel_stock') }}'">Ajouter du stock</button>
                     <button class="btn btn-primary" style="margin-top: 1em; margin-right: .5em" id="btn-edit-stock" onclick="alert('TODO: Prendre une commande rapide')">Prendre une commande rapide</button>
+                    {% if status_commande[0][2] == 1 %}
+                        <button class="btn btn-primary" style="margin-top: 1em; margin-right: .5em" id="btn-edit-stock" onclick="window.location='{{ url_for('panel_status_ordrer') }}'">Désactiver les commandes</button>
+                    {% else %}
+                        <button class="btn btn-primary" style="margin-top: 1em; margin-right: .5em" id="btn-edit-stock" onclick="window.location='{{ url_for('panel_status_ordrer') }}'">Activer les commandes</button>
+                    {% endif %}
                 </div>
                 <br>
                 <div class="bg-secondary text-center rounded p-4">

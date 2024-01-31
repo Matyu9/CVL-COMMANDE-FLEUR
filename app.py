@@ -5,7 +5,7 @@ from Cogs.login import login_cogs
 from Cogs.commande import commande_cogs
 from Cogs.panel import (panel_index_cogs, panel_show_commande_cogs, panel_show_specifique_commande_cogs,
                         panel_edit_commande_cogs, panel_edit_commande_back_cogs, panel_chart_cogs,
-                        panel_delete_commande_cogs, panel_stock_cogs)
+                        panel_delete_commande_cogs, panel_stock_cogs, panel_status_order_cogs)
 import os
 import json
 
@@ -31,6 +31,9 @@ item_name TEXT NOT NULL, item_beggining_value INT NOT NULL, item_current_value I
 last_update TIMESTAMP DEFAULT current_timestamp)""", None)
 database.exec("""CREATE TABLE IF NOT EXISTS telemetry(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 nom_telemetry TEXT NOT NULL, data_telemetry TEXT NOT NULL)""", None)
+
+database.exec("""CREATE TABLE IF NOT EXISTS config(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+config_name TEXT NOT NULL, config_data BOOL DEFAULT false NOT NULL)""", None)
 
 
 @app.route('/')
@@ -86,6 +89,11 @@ def panel_stock():
 @app.route('/panel/fast_sell/', methods=['POST', 'GET'])
 def panel_fast_sell():
     return "fast-sell"  # TODO
+
+
+@app.route('/panel/status_ordrer', methods=['POST', 'GET'])
+def panel_status_ordrer():
+    return panel_status_order_cogs(database, config_data['login_cookie'])
 
 
 @app.route('/panel/chart')

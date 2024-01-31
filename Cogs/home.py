@@ -14,4 +14,7 @@ def home_cogs(database):
         database.exec('''INSERT INTO telemetry(nom_telemetry, data_telemetry) VALUES (%s, %s)''',
                       ('user_origin', 'strangers'))  # Add value 'strangers' to the table telemetry
 
-    return render_template('home-no-login.html')
+    if database.select('''SELECT config_data FROM config WHERE config_name="can_order"''', None, 1)[0]:
+        return render_template('home-no-login.html')
+    else:
+        return render_template('home-cant-order.html')

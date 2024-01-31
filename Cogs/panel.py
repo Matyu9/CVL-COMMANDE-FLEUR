@@ -16,9 +16,10 @@ def panel_index_cogs(database, cookie_config_value):
     }
 
     list_commandes = database.select(body='SELECT * FROM commande', args=None, number_of_data=10)
+    status_commande = database.select(body='SELECT * FROM config WHERE config_name="can_order"', args=None)
 
     return render_template('panel/index.html', commande_value=commande_value,
-                           list_commandes=list_commandes)
+                           list_commandes=list_commandes, status_commande=status_commande)
 
 
 def panel_show_commande_cogs(database, cookie_config_value):
@@ -65,8 +66,6 @@ def panel_edit_commande_back_cogs(database, cookie_config_value):
         return redirect(url_for('login'))
 
     action = request.form.get('action')
-    print('-----------------')
-    print(action)
 
     if action == 'paye':
         database.exec("""UPDATE commande SET paye=%s WHERE code_unique=%s""",
@@ -149,3 +148,11 @@ def panel_stock_cogs(database, cookie_config_value):
 
         return redirect(url_for('panel_home'))
 
+
+def panel_status_order_cogs(database, cookie_config_value):
+    if request.cookies.get('token') != cookie_config_value:
+        return redirect(url_for('login'))
+
+    database.exec("""UPDATE config SET config_data=NOT config_data WHERE config_name='can_order'""", None)
+
+    return redirect(url_for('panel_home'))
