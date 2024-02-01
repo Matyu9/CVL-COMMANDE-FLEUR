@@ -102,4 +102,4 @@ def panel_chart():
 
 
 if __name__ == '__main__':
-    app.run(port=config_data['database_port'])
+    app.run(port=config_data['port'])

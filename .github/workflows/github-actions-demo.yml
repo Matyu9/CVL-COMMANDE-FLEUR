@@ -23,6 +23,6 @@ jobs:
 
         # Commandes à exécuter sur le serveur
         script: |
-          cd /home/matyu/CVL-ROSA-ST-VALENTIN
+          cd /home/deploy/CVL-ROSA-ST-VALENTIN
           git pull origin prod
           systemctl restart cvl-st-valentin.service
